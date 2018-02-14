@@ -31,3 +31,6 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
+
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
