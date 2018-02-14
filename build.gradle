@@ -22,6 +22,8 @@ dependencies {
     api 'org.apache.commons:commons-math3:3.6.1'
     api 'com.google.code.gson:gson:2.8.2'
     api 'org.glassfish.jersey.containers:jersey-container-servlet:2.14'
+    
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:21.0'
@@ -32,5 +34,16 @@ dependencies {
     testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0'
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
+task stage() {
+    dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/server"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
