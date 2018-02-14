@@ -22,7 +22,8 @@
 hs_err_pid*
 
 #gradle dir
-.gradle/
+/gradle/wrapper/*
+!/gradle/wrapper/gradle-wrapper.jar
+
 bin/web.xml
-bin/web.xml
-bin/web.xml
+
